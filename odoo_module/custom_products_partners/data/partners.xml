@@ -1,4 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
+        <!-- Partner Categories (tags) -->
+        <record id="category_direct_brand" model="res.partner.category">
+            <field name="name">Direct Brand Partner</field>
+        </record>
+
+        <record id="category_agent" model="res.partner.category">
+            <field name="name">Agent Representing Multiple Brands</field>
+        </record>
+
+        <record id="category_third_party_supplier" model="res.partner.category">
+            <field name="name">Third-Party Supplier</field>
+        </record>
+
+        <record id="category_distributor_wholesaler" model="res.partner.category">
+            <field name="name">Distributor/Wholesaler</field>
+        </record>
+
+        <record id="category_licensee_franchisee" model="res.partner.category">
+            <field name="name">Licensee/Franchisee</field>
+        </record>
+
+        <!-- Partners for Direct Brand Partner -->
+        <record id="partner_direct_brand_adidas" model="res.partner">
+            <field name="name">Adidas AG</field>
+            <field name="email">contact@adidas.com</field>
+            <field name="phone">+49 9132 84 0</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_direct_brand'))]"/>
+        </record>
+
+        <record id="partner_direct_brand_moschino" model="res.partner">
+            <field name="name">Moschino S.p.A.</field>
+            <field name="email">info@moschino.com</field>
+            <field name="phone">+39 02 7091 9000</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_direct_brand'))]"/>
+        </record>
+
+        <!-- Partners for Agent Representing Multiple Brands -->
+        <record id="partner_agent_fashion_agency" model="res.partner">
+            <field name="name">Fashion Agency Ltd.</field>
+            <field name="email">sales@fashionagency.com</field>
+            <field name="phone">+44 20 7946 0958</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_agent'))]"/>
+        </record>
+
+        <record id="partner_agent_european_reps" model="res.partner">
+            <field name="name">European Reps Inc.</field>
+            <field name="email">contact@europeanreps.com</field>
+            <field name="phone">+33 1 42 68 53 00</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_agent'))]"/>
+        </record>
+
+        <!-- Partners for Third-Party Supplier -->
+        <record id="partner_supplier_supplies" model="res.partner">
+            <field name="name">Supplies &amp; Co.</field>
+            <field name="email">info@suppliesco.com</field>
+            <field name="phone">+1 212-555-0123</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_third_party_supplier'))]"/>
+        </record>
+
+        <record id="partner_supplier_global_sources" model="res.partner">
+            <field name="name">Global Sources LLC</field>
+            <field name="email">contact@globalsources.com</field>
+            <field name="phone">+1 415-555-0198</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_third_party_supplier'))]"/>
+        </record>
+
+        <!-- Partners for Distributor/Wholesaler -->
+        <record id="partner_distributor_wholesaler_fashion" model="res.partner">
+            <field name="name">Fashion Distributors Ltd.</field>
+            <field name="email">sales@fashiondistributors.com</field>
+            <field name="phone">+61 2 9374 4000</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_distributor_wholesaler'))]"/>
+        </record>
+
+        <record id="partner_distributor_wholesaler_europe" model="res.partner">
+            <field name="name">Europe Wholesale Inc.</field>
+            <field name="email">info@europewholesale.com</field>
+            <field name="phone">+49 30 1234 5678</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_distributor_wholesaler'))]"/>
+        </record>
+
+        <!-- Partners for Licensee/Franchisee -->
+        <record id="partner_licensee_fashion_store" model="res.partner">
+            <field name="name">Fashion Store Franchisee</field>
+            <field name="email">contact@fashionstorefranchisee.com</field>
+            <field name="phone">+1 646-555-0175</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_licensee_franchisee'))]"/>
+        </record>
+
+        <record id="partner_licensee_home_decor" model="res.partner">
+            <field name="name">Home Decor Licensee Ltd.</field>
+            <field name="email">sales@homedecorlicensee.com</field>
+            <field name="phone">+44 20 7946 0958</field>
+            <field name="is_company">1</field>
+            <field name="category_id" eval="[(4, ref('custom_products_partners.category_licensee_franchisee'))]"/>
+        </record>
     </data>
 </odoo>
