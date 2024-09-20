@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <!-- Define Attributes -->
+        <record id="product_attribute_size" model="product.attribute">
+            <field name="name">Size</field>
+            <field name="create_variant">always</field>
+            <field name="display_type">radio</field>
+        </record>
+
+        <record id="product_attribute_color" model="product.attribute">
+            <field name="name">Color</field>
+            <field name="create_variant">always</field>
+            <field name="display_type">color</field>
+        </record>
+
+        <record id="product_attribute_material" model="product.attribute">
+            <field name="name">Material</field>
+            <field name="create_variant">always</field>
+            <field name="display_type">select</field>
+        </record>
+
+        <record id="product_attribute_season" model="product.attribute">
+            <field name="name">Season</field>
+            <field name="create_variant">always</field>
+            <field name="display_type">select</field>
+        </record>
+
+        <record id="product_attribute_style" model="product.attribute">
+            <field name="name">Style</field>
+            <field name="create_variant">always</field>
+            <field name="display_type">select</field>
+        </record>
+        
+        <!-- Size Values -->
+        <record id="product_attribute_value_size_small" model="product.attribute.value">
+            <field name="name">Small</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_size"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="product_attribute_value_size_medium" model="product.attribute.value">
+            <field name="name">Medium</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_size"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="product_attribute_value_size_large" model="product.attribute.value">
+            <field name="name">Large</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_size"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="product_attribute_value_size_xl" model="product.attribute.value">
+            <field name="name">XL</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_size"/>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Color Values -->
+        <record id="product_attribute_value_color_red" model="product.attribute.value">
+            <field name="name">Red</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_color"/>
+            <field name="html_color">#FF0000</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="product_attribute_value_color_blue" model="product.attribute.value">
+            <field name="name">Blue</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_color"/>
+            <field name="html_color">#0000FF</field>
+            <field name="sequence">2</field>
+        </record>
+        <record id="product_attribute_value_color_green" model="product.attribute.value">
+            <field name="name">Green</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_color"/>
+            <field name="html_color">#008000</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <!-- Material Values -->
+        <record id="product_attribute_value_material_cotton" model="product.attribute.value">
+            <field name="name">Cotton</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_material"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="product_attribute_value_material_polyester" model="product.attribute.value">
+            <field name="name">Polyester</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_material"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="product_attribute_value_material_leather" model="product.attribute.value">
+            <field name="name">Leather</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_material"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="product_attribute_value_material_denim" model="product.attribute.value">
+            <field name="name">Denim</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_material"/>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Season Values -->
+        <record id="product_attribute_value_season_ss" model="product.attribute.value">
+            <field name="name">Spring/Summer</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_season"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="product_attribute_value_season_fw" model="product.attribute.value">
+            <field name="name">Fall/Winter</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_season"/>
+            <field name="sequence">2</field>
+        </record>
+
+        <!-- Style Values -->
+        <record id="product_attribute_value_style_casual" model="product.attribute.value">
+            <field name="name">Casual</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_style"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="product_attribute_value_style_formal" model="product.attribute.value">
+            <field name="name">Formal</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_style"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="product_attribute_value_style_sport" model="product.attribute.value">
+            <field name="name">Sport</field>
+            <field name="attribute_id" ref="custom_products_partners.product_attribute_style"/>
+            <field name="sequence">3</field>
+        </record>
+    </data>
+</odoo>

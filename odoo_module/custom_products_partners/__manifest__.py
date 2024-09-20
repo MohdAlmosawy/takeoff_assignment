@@ -14,9 +14,10 @@ This module provides a custom consumable product and a custom partner for Take O
     'category': 'Sales',
     'version': '0.1',
 
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product','sale_management'],
 
     'data': [
+        'data/attributes.xml',
         'data/products.xml',
         'data/partners.xml',
     ],
