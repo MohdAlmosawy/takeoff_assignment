@@ -5,6 +5,8 @@ This repo contains solutions to the tasks required by Take Off. The assignment i
 ## Table of content
 - [python generator](#python-generator)
 - [Odoo Module : Custom Products and Partners](#odoo-module--custom-products-and-partners)
+- [Odoo CLI Script for Sales Orders](#odoo-cli-script-for-sales-orders)
+- [SQL Queries for Stock Management](#sql-queries-for-stock-management)
 
 ## Python Generator
 
@@ -110,7 +112,7 @@ We developed a Python CLI script named `create_sales_order.py` that performs the
 
 The `create_sales_order.py` script supports the following optional command-line arguments:
 
-- `--product`: Name of the product (default: `'Stylish T-Shirt'`)
+- `--product`: Name of the product (default: `Bulk Apparel Pack`)
 - `--quantity`: Quantity of the product (default: `5`)
 - `--price`: Price per unit of the product (default: product's list price)
 
@@ -129,3 +131,42 @@ To fulfill **Task 3.1**, where we need to add stock dynamically based on the Sal
    - **Simpler Approach:** While a more accurate method would involve adding a custom field (e.g., `is_cli_order`) to the `sale.order` model to flag CLI-created orders, this would conflict with the project requirement of creating a simple Odoo module with only a `data` directory.
    
    - **Demonstrated Capability:** By using the fixed partner name, we adhere to the module constraints and still achieve the necessary functionality. This approach effectively demonstrates our ability to work with SQL queries and manage data dynamically.
+
+## SQL Queries for Stock Management
+
+### Requirement
+**Task 3.1**: Write a simple SQL query (or queries) that will add stock for the product defined in Task 2.1 with the exact quantity required for the Sales Orders (SOs) created in Task 2.2.
+
+**Task 3.2**: Write an SQL query to list all products available in stock (available quantity > 0). Resulting columns should be: article name, default code, warehouse name, location full name, on-hand quantity, and available quantity.
+
+### Implementation
+
+#### 3.1 Add Stock Based on Confirmed SOs
+
+We created an SQL query in `add_stock.sql` that aggregates the total quantity of products ordered by the **CLI Client** (hardcoded in Task 2.2) from confirmed Sales Orders (`sale` state). The query then adds the exact quantity required for each product to the warehouse stock. Here's a breakdown of the steps:
+
+1. **Identify CLI Sales Orders**: 
+   - The query identifies Sales Orders where the partner is **CLI Client** and the order is confirmed (`sale` state).
+
+2. **Aggregate Quantities**:
+   - The query calculates the total quantity ordered for each product across all confirmed Sales Orders for **CLI Client**.
+
+3. **Retrieve Stock Location**:
+   - The warehouse stock location (`WH/Stock`) is retrieved to add stock in the appropriate warehouse.
+
+4. **Insert Stock**:
+   - The exact quantity required for each product is inserted into the `stock_quant` table, which manages stock levels in Odoo.
+
+**Why `reserved_quantity = 0`?**  
+Given that the products we are handling are **consumables**, they do not require reservations like storable products. Consumables are immediately available for use or sale without any need for reservations. By setting the `reserved_quantity` to zero, we ensure that the entire added stock is available for future orders or operations without manual reservation management.
+
+#### 3.2 List Products with Available Stock
+
+To verify the stock added by Task 3.1, we created a second query, `verify_stock_dynamic.sql`, that lists all products with available stock (i.e., available quantity > 0).
+This query helps ensure that the stock adjustment performed in Task 3.1 is reflected accurately in the system.
+
+### Leveraging the Hardcoded "CLI Client" for Simplicity
+
+In Task 2.2, we hardcoded the partner to **CLI Client** to simplify identification of Sales Orders created via the CLI script. This approach ensures that all CLI-created orders are easily identifiable in the database, allowing us to track and manage stock adjustments related to these orders efficiently. 
+
+While a more advanced approach would involve adding a custom field (e.g., `is_cli_order`) to the `sale.order` model to explicitly flag CLI-created orders, this would require inheriting the model, which conflicts with the requirement to create a simple Odoo module with only a `data` directory. By using the fixed partner name, we can still achieve the desired functionality with minimal complexity while demonstrating our ability to work with SQL queries and manage data dynamically.
