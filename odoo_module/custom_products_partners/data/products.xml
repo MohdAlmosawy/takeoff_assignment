@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Product Categories -->
+        <record id="product_category_apparel" model="product.category">
+            <field name="name">Apparel</field>
+            <field name="parent_id" ref="product.product_category_1"/>
+        </record>
+
+        <record id="product_category_footwear" model="product.category">
+            <field name="name">Footwear</field>
+            <field name="parent_id" ref="product.product_category_1"/>
+        </record>
+
+        <record id="product_category_accessories" model="product.category">
+            <field name="name">Accessories</field>
+            <field name="parent_id" ref="product.product_category_1"/>
+        </record>
+
+        <record id="product_category_home_decor" model="product.category">
+            <field name="name">Home Décor</field>
+            <field name="parent_id" ref="product.product_category_1"/>
+        </record>
+
+        <!-- Products -->
+
+        <record id="product_template_bulky_apparel" model="product.template">
+            <field name="name">Bulk Apparel Pack</field>
+            <field name="type">consu</field>
+            <field name="detailed_type">consu</field>
+            <field name="categ_id" ref="custom_products_partners.product_category_apparel"/>
+            <field name="list_price">1000</field>
+            <field name="standard_price">700</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/> 
+            <field name="description">Bulk pack of assorted apparel items purchased directly from brands.</field>
+            <field name="seller_ids" eval="[
+                (0, 0, {
+                    'partner_id': ref('custom_products_partners.partner_direct_brand_adidas'),
+                    'min_qty': 1,
+                    'price': 700.0,
+                    'currency_id': ref('base.USD'),
+                    'product_uom': ref('uom.product_uom_unit')
+                }),
+                (0, 0, {
+                    'partner_id': ref('custom_products_partners.partner_direct_brand_moschino'),
+                    'min_qty': 1,
+                    'price': 750.0,
+                    'currency_id': ref('base.USD'),
+                    'product_uom': ref('uom.product_uom_unit')
+                })
+            ]"/>
+        </record>
+
+        <record id="product_template_bulky_footwear" model="product.template">
+            <field name="name">Bulk Footwear Pack</field>
+            <field name="type">consu</field>
+            <field name="detailed_type">consu</field>
+            <field name="categ_id" ref="custom_products_partners.product_category_footwear"/>
+            <field name="list_price">1500</field>
+            <field name="standard_price">1000</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="description">Bulk pack of assorted footwear items.</field>
+            <field name="seller_ids" eval="[
+                (0, 0, {
+                    'partner_id': ref('custom_products_partners.partner_distributor_wholesaler_fashion'),
+                    'min_qty': 1,
+                    'price': 1000.0,
+                    'currency_id': ref('base.USD'),
+                    'product_uom': ref('uom.product_uom_unit')
+                })
+            ]"/>
+        </record>       
+
+        <record id="product_template_stylish_tshirt" model="product.template">
+            <field name="name">Stylish T-Shirt</field>
+            <field name="type">consu</field>
+            <field name="detailed_type">consu</field>
+            <field name="categ_id" ref="custom_products_partners.product_category_apparel"/>
+            <field name="list_price">25.0</field>
+            <field name="standard_price">15.0</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="sale_ok">1</field>
+            <field name="purchase_ok">1</field>
+            <field name="description">Stylish T-Shirt available in various sizes, colors, and materials.</field>
+            <field name="attribute_line_ids" eval="[
+                (0, 0, {
+                    'attribute_id': ref('custom_products_partners.product_attribute_size'),
+                    'value_ids': [(6, 0, [
+                        ref('custom_products_partners.product_attribute_value_size_small'),
+                        ref('custom_products_partners.product_attribute_value_size_medium'),
+                        ref('custom_products_partners.product_attribute_value_size_large'),
+                        ref('custom_products_partners.product_attribute_value_size_xl')
+                    ])]
+                }),
+                (0, 0, {
+                    'attribute_id': ref('custom_products_partners.product_attribute_color'),
+                    'value_ids': [(6, 0, [
+                        ref('custom_products_partners.product_attribute_value_color_red'),
+                        ref('custom_products_partners.product_attribute_value_color_blue'),
+                        ref('custom_products_partners.product_attribute_value_color_green')
+                    ])]
+                }),
+                (0, 0, {
+                    'attribute_id': ref('custom_products_partners.product_attribute_material'),
+                    'value_ids': [(6, 0, [
+                        ref('custom_products_partners.product_attribute_value_material_cotton'),
+                        ref('custom_products_partners.product_attribute_value_material_polyester')
+                    ])]
+                })
+            ]"/>
+            <field name="seller_ids" eval="[
+                (0, 0, {
+                    'partner_id': ref('custom_products_partners.partner_agent_fashion_agency'),
+                    'min_qty': 10,
+                    'price': 12.0,
+                    'currency_id': ref('base.USD'),
+                    'product_uom': ref('uom.product_uom_unit')
+                })
+            ]"/>
+        </record>
+
+        <record id="product_template_limited_jacket" model="product.template">
+            <field name="name">Limited Edition Leather Jacket</field>
+            <field name="type">consu</field>
+            <field name="detailed_type">consu</field>
+            <field name="categ_id" ref="custom_products_partners.product_category_apparel"/>
+            <field name="list_price">500.0</field>
+            <field name="standard_price">300.0</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="sale_ok">1</field>
+            <field name="purchase_ok">1</field>
+            <field name="description">Exclusive limited edition leather jacket.</field>
+            <field name="attribute_line_ids" eval="[
+                (0, 0, {
+                    'attribute_id': ref('custom_products_partners.product_attribute_material'),
+                    'value_ids': [(6, 0, [
+                        ref('custom_products_partners.product_attribute_value_material_leather')
+                    ])]
+                }),
+                (0, 0, {
+                    'attribute_id': ref('custom_products_partners.product_attribute_size'),
+                    'value_ids': [(6, 0, [
+                        ref('custom_products_partners.product_attribute_value_size_large')
+                    ])]
+                })
+            ]"/>
+            <field name="seller_ids" eval="[
+                (0, 0, {
+                    'partner_id': ref('custom_products_partners.partner_direct_brand_moschino'),
+                    'min_qty': 1,
+                    'price': 300.0,
+                    'currency_id': ref('base.USD'),
+                    'product_uom': ref('uom.product_uom_unit')
+                })
+            ]"/>
+        </record>
+
+        <record id="product_template_seasonal_scarf" model="product.template">
+            <field name="name">Seasonal Scarf</field>
+            <field name="type">consu</field>
+            <field name="detailed_type">consu</field>
+            <field name="categ_id" ref="custom_products_partners.product_category_accessories"/>
+            <field name="list_price">50.0</field>
+            <field name="standard_price">30.0</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="sale_ok">1</field>
+            <field name="purchase_ok">1</field>
+            <field name="description">Scarf from the latest seasonal collection.</field>
+            <field name="attribute_line_ids" eval="[
+                (0, 0, {
+                    'attribute_id': ref('custom_products_partners.product_attribute_season'),
+                    'value_ids': [(6, 0, [
+                        ref('custom_products_partners.product_attribute_value_season_ss')
+                    ])]
+                }),
+                (0, 0, {
+                    'attribute_id': ref('custom_products_partners.product_attribute_color'),
+                    'value_ids': [(6, 0, [
+                        ref('custom_products_partners.product_attribute_value_color_blue')
+                    ])]
+                })
+            ]"/>
+            <field name="seller_ids" eval="[
+                (0, 0, {
+                    'partner_id': ref('custom_products_partners.partner_licensee_home_decor'),
+                    'min_qty': 5,
+                    'price': 30.0,
+                    'currency_id': ref('base.USD'),
+                    'product_uom': ref('uom.product_uom_unit')
+                })
+            ]"/>
+        </record>
+
+        <record id="product_template_face_mask" model="product.template">
+            <field name="name">Protective Face Mask</field>
+            <field name="type">consu</field>
+            <field name="detailed_type">consu</field>
+            <field name="categ_id" ref="custom_products_partners.product_category_accessories"/>
+            <field name="list_price">5.0</field>
+            <field name="standard_price">2.0</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="sale_ok">1</field>
+            <field name="purchase_ok">1</field>
+            <field name="description">Protective face mask with batch.</field>
+            <field name="attribute_line_ids" eval="[
+                (0, 0, {
+                    'attribute_id': ref('custom_products_partners.product_attribute_color'),
+                    'value_ids': [(6, 0, [
+                        ref('custom_products_partners.product_attribute_value_color_green'),
+                        ref('custom_products_partners.product_attribute_value_color_blue')
+                    ])]
+                })
+            ]"/>
+            <field name="seller_ids" eval="[
+                (0, 0, {
+                    'partner_id': ref('custom_products_partners.partner_supplier_global_sources'),
+                    'min_qty': 100,
+                    'price': 2.0,
+                    'currency_id': ref('base.USD'),
+                    'product_uom': ref('uom.product_uom_unit')
+                })
+            ]"/>
+        </record>
+        
+    </data>
+</odoo>
