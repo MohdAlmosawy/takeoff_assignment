@@ -106,5 +106,14 @@
             <field name="is_company">1</field>
             <field name="category_id" eval="[(4, ref('custom_products_partners.category_licensee_franchisee'))]"/>
         </record>
+
+        <!-- CLI Client Partner -->
+        <record id="partner_cli_client" model="res.partner">
+            <field name="name">CLI Client</field>
+            <field name="email">cliclient@example.com</field>
+            <field name="phone">+1 800-555-0100</field>
+            <field name="is_company">1</field>
+        </record>
+        
     </data>
 </odoo>

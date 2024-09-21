@@ -58,3 +58,74 @@ odoo_module
 
 ### Future Enhancement
 An enhancement suggestion is to automate enabling **Product Variants**. This would eliminate the need for manual configuration by setting the required parameters programmatically.
+
+
+## Odoo CLI Script for Sales Orders
+
+### Requirement
+**Task 2.2**: Write a CLI script that will connect to Odoo via RPC with the host, port, user, and password defined in a `.env` file. Using the product and customer created in Task 2.1, create and confirm a Sales Order (SO). Print the SO name, SO lines (product name, price, quantity), and a list of transfers with their states to the console. No need to manage routes and locations; default settings are sufficient.
+
+### Implementation
+We developed a Python CLI script named `create_sales_order.py` that performs the following actions:
+
+1. **Connect to Odoo**: Establishes an RPC connection using credentials from a `.env` file.
+2. **Create a Sales Order**: Utilizes the custom product and the fixed partner "CLI Client" to create a new Sales Order.
+3. **Confirm the Sales Order**: Validates the Sales Order to generate associated stock transfers.
+4. **Print Details**: Outputs the Sales Order name, line items (product name, price, quantity), and associated stock transfers with their states to the console.
+
+### Instructions for Script Usage
+
+1. **Ensure `.env` File is Configured**
+   
+   - Place a `.env` file in the `cli_scripts` directory (`takeoff_assignment/cli_scripts`) with the following content:
+   
+     ```ini
+     ODOO_HOST=localhost
+     ODOO_PORT=PORT
+     ODOO_DB=your_database_name
+     ODOO_USER=your_username
+     ODOO_PASSWORD=your_password
+     ```
+   
+   > **Security Note**: Add the `.env` file to your `.gitignore` to prevent sensitive information from being pushed to version control.
+
+2. **Install Required Python Packages**
+   
+   Ensure you have the necessary Python packages installed. From the project root, activate your virtual environment and install the dependencies:
+   
+   ```bash
+   pip install odoorpc python-dotenv
+   ```
+
+3. **Run the CLI Script**
+   
+   Navigate to the `cli_scripts` directory and execute the script:
+   
+   ```bash
+   cd cli_scripts
+   python3 create_sales_order.py
+   ```
+
+### Script Usage with Command-Line Arguments
+
+The `create_sales_order.py` script supports the following optional command-line arguments:
+
+- `--product`: Name of the product (default: `'Stylish T-Shirt'`)
+- `--quantity`: Quantity of the product (default: `5`)
+- `--price`: Price per unit of the product (default: product's list price)
+
+**Example Usage:**
+
+```bash
+python3 create_sales_order.py --product "Bulk Footwear Pack" --quantity 10 --price 30.0
+```
+
+**Note:** All Sales Orders created using this script will automatically be associated with hardcoded "CLI Client" partner.
+
+To fulfill **Task 3.1**, where we need to add stock dynamically based on the Sales Orders created via the CLI script, we utilize the "CLI Client" as a unique identifier for these orders. Here's why and how:
+   
+   - **Simplified Identification:** By hardcoding the partner to "CLI Client", we ensure that all Sales Orders created by the CLI script are easily identifiable in the database. This eliminates the need for additional fields or complex filtering.
+ 
+   - **Simpler Approach:** While a more accurate method would involve adding a custom field (e.g., `is_cli_order`) to the `sale.order` model to flag CLI-created orders, this would conflict with the project requirement of creating a simple Odoo module with only a `data` directory.
+   
+   - **Demonstrated Capability:** By using the fixed partner name, we adhere to the module constraints and still achieve the necessary functionality. This approach effectively demonstrates our ability to work with SQL queries and manage data dynamically.
