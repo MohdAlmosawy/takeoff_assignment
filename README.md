@@ -7,6 +7,7 @@ This repo contains solutions to the tasks required by Take Off. The assignment i
 - [Odoo Module : Custom Products and Partners](#odoo-module--custom-products-and-partners)
 - [Odoo CLI Script for Sales Orders](#odoo-cli-script-for-sales-orders)
 - [SQL Queries for Stock Management](#sql-queries-for-stock-management)
+- [Linux Scripting](#linux-scripting)
 
 ## Python Generator
 
@@ -170,3 +171,53 @@ This query helps ensure that the stock adjustment performed in Task 3.1 is refle
 In Task 2.2, we hardcoded the partner to **CLI Client** to simplify identification of Sales Orders created via the CLI script. This approach ensures that all CLI-created orders are easily identifiable in the database, allowing us to track and manage stock adjustments related to these orders efficiently. 
 
 While a more advanced approach would involve adding a custom field (e.g., `is_cli_order`) to the `sale.order` model to explicitly flag CLI-created orders, this would require inheriting the model, which conflicts with the requirement to create a simple Odoo module with only a `data` directory. By using the fixed partner name, we can still achieve the desired functionality with minimal complexity while demonstrating our ability to work with SQL queries and manage data dynamically.
+
+## Linux Scripting
+
+### Requirement
+**Task 4**: Write a simple bash script that will accept 2 parameters - model name and path to a log file. The script should display all warnings, errors, and critical messages from the defined Odoo log file related to the specified model name.
+
+### Implementation
+We developed a bash script named `filter_odoo_logs.sh` located in the `bash_scripts` directory. This script filters Odoo log files to extract entries related to a specific model with severity levels of **WARNING**, **ERROR**, and **CRITICAL**. This functionality is essential for monitoring and troubleshooting by allowing focused inspection of relevant log entries.
+
+#### Script Details
+
+- **Filename:** `filter_odoo_logs.sh`
+- **Location:** `bash_scripts/filter_odoo_logs.sh`
+- **Permissions:**  
+  Ensure the script is executable by running:
+  ```bash
+  chmod +x bash_scripts/filter_odoo_logs.sh
+  ```
+#### Explanation of the Script
+
+1. **Parameter Validation:**
+   - The script expects exactly two arguments: `<model_name>` and `<log_file_path>`.
+   - If the arguments are missing or incorrect, it displays usage instructions and exits.
+
+2. **Log File Verification:**
+   - Checks whether the specified log file exists.
+   - If not, it outputs an error message and exits.
+
+3. **Log Filtering Process:**
+   - Uses `grep -E` to search for lines containing any of the defined severity levels: `WARNING`, `ERROR`, or `CRITICAL`.
+   - Pipes the result to another `grep` to further filter lines that contain the specified model name.
+   - Outputs the final filtered log entries to the console.
+
+#### Usage Example
+
+**Basic Usage (Display on Console):**
+
+   ```bash
+   ./bash_scripts/filter_odoo_logs.sh sale.order /var/log/odoo/odoo.log
+   ```
+
+   **Sample Output:**
+   ```plaintext
+   2024-09-21 17:23:39,123  WARNING sale_order.py:456 - Error processing model sale.order
+   2024-09-21 17:25:10,456  ERROR sale_order.py:789 - Failed to create sale.order SO/00035
+   2024-09-21 17:30:15,789  CRITICAL sale_order.py:890 - Critical failure in sale.order processing
+   ```
+
+
+[def]: #linux-scripting
