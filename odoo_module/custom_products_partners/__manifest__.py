@@ -17,9 +17,9 @@ This module provides a custom consumable product and a custom partner for Take O
     'depends': ['base', 'product','sale_management','purchase'],
 
     'data': [
+        'data/partners.xml',
         'data/attributes.xml',
         'data/products.xml',
-        'data/partners.xml',
     ],
 
     'license': 'LGPL-3',
