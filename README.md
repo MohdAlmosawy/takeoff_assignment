@@ -110,7 +110,7 @@ We developed a Python CLI script named `create_sales_order.py` that performs the
 
 The `create_sales_order.py` script supports the following optional command-line arguments:
 
-- `--product`: Name of the product (default: `'Stylish T-Shirt'`)
+- `--product`: Name of the product (default: `Bulk Apparel Pack`)
 - `--quantity`: Quantity of the product (default: `5`)
 - `--price`: Price per unit of the product (default: product's list price)
 
