@@ -37,7 +37,6 @@ def get_model(odoo, model_name):
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description='Create and confirm a Sales Order in Odoo.')
-    parser.add_argument('--partner', type=str, help='Name of the partner/customer')
     parser.add_argument('--product', type=str, help='Name of the product')
     parser.add_argument('--quantity', type=float, help='Quantity of the product')
     parser.add_argument('--price', type=float, help='Price per unit of the product')
@@ -53,13 +52,15 @@ def main():
     args = parse_arguments()
 
     # Set default values
-    DEFAULT_PARTNER_NAME = 'test client' 
-    DEFAULT_PRODUCT_NAME = 'Stylish T-Shirt'     
+    DEFAULT_PARTNER_NAME = 'CLI Client'
+    DEFAULT_PRODUCT_NAME = 'Bulk Apparel Pack'
     DEFAULT_QUANTITY = 5
     DEFAULT_PRICE_UNIT = None 
 
+    # Set partner name to 'CLI Client' without allowing overrides
+    partner_name = DEFAULT_PARTNER_NAME
+
     # Use command-line arguments if provided, else use defaults
-    partner_name = args.partner if args.partner else DEFAULT_PARTNER_NAME
     product_name = args.product if args.product else DEFAULT_PRODUCT_NAME
     quantity = args.quantity if args.quantity else DEFAULT_QUANTITY
     price_unit = args.price if args.price else DEFAULT_PRICE_UNIT
